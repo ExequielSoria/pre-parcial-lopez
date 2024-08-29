@@ -1,0 +1,18 @@
+version: '3'
+services:
+  nginxproxymanager:
+    image: 'jc21/nginx-proxy-manager:latest'
+    ports:
+    - "${NGINX_PORT_1}"
+    - "${NGINX_PORT_2}"
+    - "${NGINX_PORT_3}"
+    volumes:
+    - ./data:/data
+    - ./letsencrypt:/etc/letsencrypt
+
+  db:
+    image: 'jc21/mariadb-aria:latest'
+    environment:
+      - .env
+    volumes:
+      - ./data/mysql:/var/lib/mysql
